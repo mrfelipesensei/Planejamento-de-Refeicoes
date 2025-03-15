@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planejamento de Refeições</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+</head>
+<body>
+    <div class="container">
+        <h1>Planejamento de Refeições</h1>
+        <form action="/buscar" method="POST">
+            <label for="dieta">Dieta (ex: vegan, glutenFree, lowcarb, etc.):</label>
+            <input type="text" name="dieta" id="dieta" required><br><br>
+
+            <label for="numero_de_receitas">Número de Receitas:</label>
+            <input type="number" name="numero_de_receitas" id="numero_de_receitas" required><br><br>
+
+            <button type="submit">Buscar Receitas</button>
+        </form>
+
+        {% if receitas %}
+            <h2>Receitas Encontradas:</h2>
+            <ul>
+                {% for receita in receitas %}
+                <li>
+                    <strong>{{receita['title']}}</strong><br>
+                    <a href="{{receita['link']}}" target="_blank">Ver Receita</a>
+                </li>
+                {% endfor %}
+            </ul>
+        {% elif error %}
+        <p style="color: red">{{errror}}</p>
+        {% endif %}
+    </div>
+</body>
+</html>
