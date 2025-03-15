@@ -18,6 +18,7 @@ def buscar_receitas(dieta,numero_de_receitas=5):
         return None
     
 #Página inicial
+@app.route('/')
 def index():
     return render_template('index.html')
 
